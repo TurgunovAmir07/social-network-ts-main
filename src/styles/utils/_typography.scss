@@ -1,0 +1,65 @@
+h1 {
+  font-size: 32px;
+  font-size: calc(0.5vw + 22px); //? 24 - 375 | 32 - 1920
+  font-weight: 600;
+  margin: 0;
+}
+
+h2 {
+  font-size: calc(0.8vw + 8px); //? 20 - 1440 | 24 - 1920
+  font-weight: 500;
+}
+
+p,
+span {
+  font-size: calc(0.8vw + 4px); //? 16 - 1440 | 20 - 1920
+  margin: 0;
+}
+
+.secondary__text {
+  font-size: calc(0.4vw + 8px); //? 14 - 1440 | 16 - 1920
+  font-weight: 300;
+  color: var(--gray);
+}
+
+.List {
+  p {
+    font-size: calc(0.4vw + 8px); //? 14 - 1440 | 16 - 1920
+    font-weight: 500;
+  }
+
+  .count {
+    color: var(--prime-color);
+    font-weight: 400;
+  }
+}
+
+.Badge {
+  padding: 5px;
+  background-color: var(--prime-color);
+  border-radius: 50px;
+  height: 25px;
+  text-align: center;
+  color: white;
+
+  line-height: 14px; //? 12 - 1440 | 14 - 1920
+  font-size: 14px; //? 12 - 1440 | 14 - 1920
+  flex: 0 1 25px;
+  transition: 200ms;
+}
+
+@media (max-width: 1480px) {
+  p,
+  span {
+    font-size: 16px;
+  }
+
+  .Badge {
+    padding: 4px;
+    height: 20px;
+    flex: 0 1 20px;
+
+    line-height: 12px; //? 12 - 1440 | 14 - 1920
+    font-size: 12px; //? 12 - 1440 | 14 - 1920
+  }
+}
