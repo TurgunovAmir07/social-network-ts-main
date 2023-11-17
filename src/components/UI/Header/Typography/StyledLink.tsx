@@ -1,11 +1,11 @@
-import React from "react"
+import React from "react";
+import { Link } from "react-router-dom";
 
 type StyledLinkProps = {
-  linkText: string,
-}
+  linkText: string;
+  to: string;
+};
 
-export const StyledLink = ({ linkText }: StyledLinkProps) => {
-  return (
-    <a>{linkText}</a>
-  )
-}
+export const StyledLink = ({ linkText, to }: StyledLinkProps) => {
+  return <Link to={to}>{linkText}</Link>;
+};

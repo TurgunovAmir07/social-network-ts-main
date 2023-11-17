@@ -154,24 +154,16 @@ export const Homework = () => {
       <ArrayTen items={[46, 47, 48, 49, 50]} />
 
       <div>сумма: {sumResult}</div>
-
       <div>произведение: {multiplyResult}</div>
-
       <div>{numberToCheck} чётное число? {isEvenResult ? "Да" : "Нет"}</div>
-
       <div>{capitalizeResult}</div>
-
       <div>{JSON.stringify(arrResult)}</div>
-
       <div>{MaxNumber}</div>
-
       <div>{JSON.stringify(filterStrings)}</div>
-
       <div>среднее значение: {averageResult}</div>
-
       <div>{uniqueValues}</div>
-
       <div>{FormattedDate}</div>
+      
       </div>
   );
 };
