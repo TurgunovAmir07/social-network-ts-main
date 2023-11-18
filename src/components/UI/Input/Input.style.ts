@@ -42,7 +42,8 @@ export const StyledInput = styled.input`
   display: block;
   width: 100%;
   margin-bottom: 20px;
-  border: 2px solid ${(props) => props.theme.colors.red};
+  border: 2px solid;
+  border-color: ${(props) => props.theme.colors.disabledBgc};
   background-color: transparent;
 
   border: 1px solid transparent;
