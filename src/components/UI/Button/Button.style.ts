@@ -64,6 +64,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   color: white;
   transition: 200ms;
   width: 100%;
+  margin-bottom: 30px;
   &:disabled {
     background-color: ${(props) => props.theme.colors.primeColor};
   }
