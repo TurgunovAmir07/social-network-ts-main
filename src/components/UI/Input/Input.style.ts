@@ -41,7 +41,7 @@ export const ErrorMessage = styled.p`
 export const StyledInput = styled.input`
   display: block;
   width: 100%;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   border: 2px solid;
   border-color: ${(props) => props.theme.colors.disabledBgc};
   background-color: transparent;
@@ -58,6 +58,10 @@ export const StyledInput = styled.input`
   &:is(:hover, :focus) {
     border-color: ${(props) => props.theme.colors.primeColor};
   }
+
+  /* &:last-child {
+    margin-bottom: 30px;
+  } */
 
   @media (max-width: 730px) {
     padding: 10px 12px;

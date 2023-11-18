@@ -74,23 +74,13 @@ export const StyledButton = styled.button<StyledButtonProps>`
       color: white;
     `}
 
-  /* ${(props) =>
-    props.$isPrimary &&
-    css`
-      background-color: ${(props) => props.theme.colors.primeColor};
-      color: white;
-    `} */
-
-    ${(props) =>
+  ${(props) =>
     props.$isSecondary &&
     css`
       background-color: ${(props) => props.theme.colors.lightGray};
       color: ${(props) => props.theme.colors.placeholderColor};
     `}
-   /* &.secondary {
-    background-color: var(--light-gray);
-    color: var(--placeholder-color);
-  } */
+
   &:disabled:hover {
     cursor: default;
     opacity: 0.5;

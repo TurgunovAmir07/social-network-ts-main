@@ -27,7 +27,7 @@ export const LoginPage = () => {
               type="password"
               placeholder="Пароль"
             />
-            <Button buttonText="Войти" isPrimary />
+            <Button buttonText="Войти" isPrimary={false} />
           </form>
           <StyledLink to="/" linkText="Забыли пароль?" />
           <RegistrationInfo />
