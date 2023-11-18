@@ -6,7 +6,7 @@ type StyledButtonProps = {
 };
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  cursor: pointer;
+  /* cursor: pointer;
   padding: 12px 15px;
   font-size: inherit;
   border-radius: 10px;
@@ -54,5 +54,54 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   @media (max-width: 730px) {
     padding: 10px 12px;
+  } */
+
+  cursor: pointer;
+  padding: 12px 15px;
+  font-size: inherit;
+  border-radius: 10px;
+  background-color: ${(props) => props.theme.colors.disabledBgc};
+  color: white;
+  transition: 200ms;
+  width: 100%;
+  &:disabled {
+    background-color: ${(props) => props.theme.colors.primeColor};
+  }
+  ${(props) =>
+    props.$isPrimary &&
+    css`
+      background-color: ${(props) => props.theme.colors.primeColor};
+      color: white;
+    `}
+
+  /* ${(props) =>
+    props.$isPrimary &&
+    css`
+      background-color: ${(props) => props.theme.colors.primeColor};
+      color: white;
+    `} */
+
+    ${(props) =>
+    props.$isSecondary &&
+    css`
+      background-color: ${(props) => props.theme.colors.lightGray};
+      color: ${(props) => props.theme.colors.placeholderColor};
+    `}
+   /* &.secondary {
+    background-color: var(--light-gray);
+    color: var(--placeholder-color);
+  } */
+  &:disabled:hover {
+    cursor: default;
+    opacity: 0.5;
+  }
+  &:hover {
+    translate: 0 -5px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
+  }
+  &:active {
+    transition: 100ms;
+    translate: 0 0;
+    box-shadow: none;
   }
 `;

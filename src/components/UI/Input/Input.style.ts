@@ -46,7 +46,7 @@ export const StyledInput = styled.input`
   border-color: ${(props) => props.theme.colors.disabledBgc};
   background-color: transparent;
 
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
   outline: 0;
   font-family: inherit;
   padding: 12px 15px;
