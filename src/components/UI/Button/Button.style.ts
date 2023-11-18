@@ -1,9 +1,9 @@
-import styled, { css } from "styled-components"
+import styled, { css } from "styled-components";
 
 type StyledButtonProps = {
-  $isPrimary?: boolean,
-  $isSecondary?: boolean,
-}
+  $isPrimary?: boolean;
+  $isSecondary?: boolean;
+};
 
 export const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
@@ -15,17 +15,21 @@ export const StyledButton = styled.button<StyledButtonProps>`
   width: 100%;
   margin-bottom: 30px;
 
-  ${(props) => props.$isPrimary && css`
-    background-color: ${props => props.theme.colors.primeColor};
-    color: white;
-  `}
-  ${(props) => props.$isSecondary && css`
-    background-color: ${props => props.theme.colors.lightGray};
-    color:  ${(props) => props.theme.colors.placeholderColor};
-  `}
+  ${(props) =>
+    props.$isPrimary &&
+    css`
+      background-color: ${(props) => props.theme.colors.primeColor};
+      color: white;
+    `}
+  ${(props) =>
+    props.$isSecondary &&
+    css`
+      background-color: ${(props) => props.theme.colors.lightGray};
+      color: ${(props) => props.theme.colors.placeholderColor};
+    `}
 
   &:disabled {
-    background-color: ${props => [props.theme.colors.disabledBgc]};
+    background-color: ${(props) => [props.theme.colors.disabledBgc]};
   }
 
   &:disabled:hover {
@@ -51,4 +55,4 @@ export const StyledButton = styled.button<StyledButtonProps>`
   @media (max-width: 730px) {
     padding: 10px 12px;
   }
-`
+`;

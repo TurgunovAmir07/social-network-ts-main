@@ -4,30 +4,35 @@ import { MainPage } from "./pages/MainPage/MainPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { Homework } from "./pages/HomeworkPage/Homework";
+import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage";
 
 const routerConfig = createBrowserRouter([
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage />,
   },
   {
-    path: '/',
+    path: "/",
     element: <MainPage />,
   },
   {
-    path: '/profile',
-    element: <ProfilePage />
+    path: "/profile",
+    element: <ProfilePage />,
   },
   {
-    path: '/homework',
-    element: <Homework />
-  }
-])
+    path: "/homework",
+    element: <Homework />,
+  },
+  {
+    path: "/registration",
+    element: <RegistrationPage />,
+  },
+]);
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <RouterProvider router={routerConfig}/>
+      <RouterProvider router={routerConfig} />
     </div>
   );
 };
