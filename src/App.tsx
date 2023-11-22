@@ -6,6 +6,7 @@ import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { Homework } from "./pages/HomeworkPage/Homework";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage";
 import { ForgetPasswordPage } from "./pages/ForgetPasswordPage/ForgetPasswordPage";
+import { ComeUpWithPassword } from "./pages/ComeUpWithPassword/ComeUpWithPassword";
 
 const routerConfig = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const routerConfig = createBrowserRouter([
   {
     path: "/forgetpassword",
     element: <ForgetPasswordPage />,
+  },
+  {
+    path: "/comeupwithpassword",
+    element: <ComeUpWithPassword />,
   },
 ]);
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledForgetPasswordPage = styled.div`
+export const StyledComeUpWithPassword = styled.div`
   box-shadow: 0 0 10px ${(props) => props.theme.colors.lightGray};
   border-radius: 20px;
   background-color: ${(props) => props.theme.colors.elemsBgc};
