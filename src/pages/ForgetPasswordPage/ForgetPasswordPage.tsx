@@ -1,12 +1,9 @@
 import React from "react";
-import "./LoginPage.scss";
 import { Heading } from "../../components/UI/Header/Typography/Heading";
-import { StyledLink } from "../../components/UI/Header/Typography/StyledLink";
-import { Button } from "../../components/UI/Button/Button";
 import { Input } from "../../components/UI/Input/Input";
 import { Container } from "../../components/UI/container/container.style";
-import { RegistrationInfo } from "../../components/UI/RegistrationInfo/RegistrationInfo";
-import { StyledLoginPage } from "./LoginPage.style";
+import { StyledForgetPasswordPage } from "./ForgetPasswordPage.styled";
+import { Button } from "../../components/UI/Button/Button";
 import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
@@ -14,7 +11,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 interface IRegistrationForm {
-  userpassword: string;
   userphone: string;
 }
 
@@ -25,13 +21,9 @@ const registrationFormsSchema = yup.object({
     .string()
     .matches(regexUZB, "Введите узбекский номер телефона")
     .required("Обязательное поле!"),
-  userpassword: yup
-    .string()
-    .min(4, "Пароль должен содержать как минимум 4 символа!")
-    .required("Обязательное поле!"),
 });
 
-export const LoginPage = () => {
+export const ForgetPasswordPage = () => {
   const {
     control,
     handleSubmit,
@@ -39,7 +31,6 @@ export const LoginPage = () => {
   } = useForm<IRegistrationForm>({
     resolver: yupResolver(registrationFormsSchema),
     defaultValues: {
-      userpassword: "",
       userphone: "",
     },
   });
@@ -50,10 +41,15 @@ export const LoginPage = () => {
 
   return (
     <Container>
-      <StyledLoginPage>
+      <StyledForgetPasswordPage>
         <div className="LoginPage">
-          <Heading headingText="Авторизация" />
+          <Heading headingText="Забыли пароль?" />
           <form onSubmit={handleSubmit(onRegistrationSubmit)}>
+            <p>
+              Укажите свой номер телефона,
+              <br />
+              чтобы получить код для сброса пароля.
+            </p>
             <Controller
               name="userphone"
               control={control}
@@ -67,29 +63,14 @@ export const LoginPage = () => {
                 />
               )}
             />
-            <Controller
-              name="userpassword"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  isError={errors.userpassword ? true : false}
-                  errorMessage={errors.userpassword?.message}
-                  type="password"
-                  placeholder="Пароль"
-                  {...field}
-                />
-              )}
-            />
             <Button
-              buttonText="Войти"
-              isPrimary
               disabled={!!Object.keys(errors).length}
+              buttonText="Отправить"
+              isPrimary
             />
           </form>
-          <StyledLink to="/forgetpassword" linkText="Забыли пароль?" />
-          <RegistrationInfo />
         </div>
-      </StyledLoginPage>
+      </StyledForgetPasswordPage>
     </Container>
   );
 };

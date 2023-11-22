@@ -1,4 +1,5 @@
 export const colors = {
+  labelColor: "#A0A0A0",
   bgc: "#f6f6f6",
   elemsBgc: "#fff",
   primeColor: "#526ed3",

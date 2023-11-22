@@ -1,5 +1,5 @@
-import { StyledLink } from "../Header/Typography/StyledLink";
-import { StyledRegistrationInfo } from "./RegistrationInfo.style";
+import { StyledLink } from "../../components/UI/Header/Typography/StyledLink";
+import { StyledRegistrationInfo } from "../../components/UI/RegistrationInfo/RegistrationInfo.style";
 
 export const RegistrationInfoForRegistration = () => {
   return (
@@ -8,7 +8,7 @@ export const RegistrationInfoForRegistration = () => {
         <span>
           Уже есть аккаунт? <StyledLink linkText="Войти" to="/login" />
         </span>
-        <p>Регистрация с помощью</p>
+        <p>Зарегистрироваться с помощью</p>
         <div className="icons-wrapper">
           <a className="reg__link google-link" href="#">
             <img src="./img/icons/google.svg" alt="Google" />
