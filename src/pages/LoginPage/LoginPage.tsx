@@ -18,7 +18,7 @@ import { changeUser } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-interface IRegistrationForm {
+interface ILoginForm {
   userpassword: string;
   userphone: string;
 }
@@ -50,7 +50,7 @@ export const LoginPage = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegistrationForm>({
+  } = useForm<ILoginForm>({
     resolver: yupResolver(registrationFormsSchema),
     defaultValues: {
       userpassword: "",
@@ -62,7 +62,7 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.userSlice.user);
 
-  const onRegistrationSubmit: SubmitHandler<IRegistrationForm> = (data) => {
+  const onRegistrationSubmit: SubmitHandler<ILoginForm> = (data) => {
     dispatch(changeUser(mockUser));
     // console.log("DATA:  ", data);
   };

@@ -10,6 +10,12 @@ import { Controller } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { RootState } from "../../store/store";
+import { changeUser } from "../../store/userSlice";
+import { useEffect } from "react";
 
 interface IRegistrationForm {
   username: string;
@@ -18,7 +24,7 @@ interface IRegistrationForm {
 }
 
 const regexUZB = /^(?:\+998)?(?:\d{2})?(?:\d{7})$/;
-
+const date = new Date();
 const registrationFormsSchema = yup.object({
   username: yup.string().required("Обязательное поле!"),
   userphone: yup
@@ -30,6 +36,16 @@ const registrationFormsSchema = yup.object({
     .min(4, "Пароль должен содержать как минимум 4 символа!")
     .required("Обязательное поле!"),
 });
+
+const mockUser = {
+  mail: "vasya@mail.com",
+  phone_number: "1234567",
+  setUser_id: 1,
+  name: "vasya petrov",
+  reg_date: date.toISOString(),
+  password: "aaaa",
+  city: "andijan",
+};
 
 export const RegistrationPage = () => {
   const {
@@ -45,11 +61,22 @@ export const RegistrationPage = () => {
     },
   });
 
-  // console.warn("ERRORS: ", errors);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const setUser = useSelector((state: RootState) => state.authSlice.setUser);
 
   const onRegistrationSubmit: SubmitHandler<IRegistrationForm> = (data) => {
-    console.log("DATA:  ", data);
+    dispatch(changeUser(mockUser));
+    // console.log("DATA:  ", data);
   };
+
+  useEffect(() => {
+    console.log("SET USER: ", setUser);
+
+    if (setUser?.setUser_id) {
+      navigate("/");
+    }
+  }, [setUser]);
 
   return (
     <Container>
@@ -57,12 +84,6 @@ export const RegistrationPage = () => {
         <div className="LoginPage">
           <Heading headingText="Регистрация" />
           <form onSubmit={handleSubmit(onRegistrationSubmit)}>
-            {/* <Input
-              isError={false}
-              errorMessage="Введите имя в правильном формате"
-              type="text"
-              placeholder="Имя и фамилия"
-            /> */}
             <Controller
               name="username"
               control={control}
@@ -76,7 +97,6 @@ export const RegistrationPage = () => {
                 />
               )}
             />
-
             <Controller
               name="userphone"
               control={control}
@@ -90,7 +110,6 @@ export const RegistrationPage = () => {
                 />
               )}
             />
-
             <Controller
               name="userpassword"
               control={control}
@@ -104,14 +123,12 @@ export const RegistrationPage = () => {
                 />
               )}
             />
-
             <Button
               disabled={!!Object.keys(errors).length}
               buttonText="Зарегистрироваться"
               isPrimary
             />
           </form>
-          {/* <StyledLink to="/" linkText="Забыли пароль?" /> */}
           <RegistrationInfoForRegistration />
         </div>
       </StyledLoginPage>

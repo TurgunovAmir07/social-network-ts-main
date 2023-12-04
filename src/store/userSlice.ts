@@ -6,8 +6,8 @@ interface IUserSliceState {
 
 export interface IUser {
   mail: string;
-  phone_number: number;
-  user_id: string;
+  phone_number: string;
+  user_id: number;
   name: string;
   reg_date: string;
   city: string;
