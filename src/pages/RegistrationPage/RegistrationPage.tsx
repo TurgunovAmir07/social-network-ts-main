@@ -14,13 +14,16 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
-import { changeUser } from "../../store/userSlice";
+import { changeUser } from "../../store/slices/userSlice";
 import { useEffect } from "react";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 interface IRegistrationForm {
   username: string;
   userpassword: string;
   userphone: string;
+  useremail: string;
+  usercity: string;
 }
 
 const regexUZB = /^(?:\+998)?(?:\d{2})?(?:\d{7})$/;
@@ -35,6 +38,8 @@ const registrationFormsSchema = yup.object({
     .string()
     .min(4, "Пароль должен содержать как минимум 4 символа!")
     .required("Обязательное поле!"),
+  useremail: yup.string().email().required("Обязательное поле!"),
+  usercity: yup.string().required("Обязательное поле!"),
 });
 
 const mockUser = {
@@ -58,12 +63,14 @@ export const RegistrationPage = () => {
       username: "",
       userpassword: "",
       userphone: "",
+      usercity: "",
+      useremail: "",
     },
   });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const setUser = useSelector((state: RootState) => state.authSlice.setUser);
+  const setUser = useTypedSelector((state) => state.authSlice.setUser);
 
   const onRegistrationSubmit: SubmitHandler<IRegistrationForm> = (data) => {
     dispatch(changeUser(mockUser));
@@ -74,9 +81,9 @@ export const RegistrationPage = () => {
     console.log("SET USER: ", setUser);
 
     if (setUser?.setUser_id) {
-      navigate("/");
+      navigate("/main");
     }
-  }, [setUser]);
+  }, [setUser, navigate]);
 
   return (
     <Container>
@@ -93,6 +100,32 @@ export const RegistrationPage = () => {
                   errorMessage={errors.username?.message}
                   type="text"
                   placeholder="Имя и фамилия"
+                  {...field}
+                />
+              )}
+            />
+            <Controller
+              name="useremail"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  isError={errors.useremail ? true : false}
+                  errorMessage={errors.useremail?.message}
+                  type="email"
+                  placeholder="Почта"
+                  {...field}
+                />
+              )}
+            />
+            <Controller
+              name="usercity"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  isError={errors.usercity ? true : false}
+                  errorMessage={errors.usercity?.message}
+                  type="text"
+                  placeholder="Ваш город"
                   {...field}
                 />
               )}

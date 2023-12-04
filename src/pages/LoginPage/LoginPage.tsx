@@ -12,38 +12,36 @@ import { Controller } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RootState } from "../../store/store";
-import { useDispatch } from "react-redux/es/exports";
-import { changeUser } from "../../store/userSlice";
+// import { RootState } from "../../store/store";
+// import { useDispatch } from "react-redux/es/exports";
+// import { changeUser } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useLoginUserMutation } from "../../store/API/authApi";
 
 interface ILoginForm {
   userpassword: string;
-  userphone: string;
+  useremail: string;
 }
 
-const regexUZB = /^(?:\+998)?(?:\d{2})?(?:\d{7})$/;
+// const regexUZB = /^(?:\+998)?(?:\d{2})?(?:\d{7})$/;
 
 const registrationFormsSchema = yup.object({
-  userphone: yup
-    .string()
-    .matches(regexUZB, "Введите узбекский номер телефона")
-    .required("Обязательное поле!"),
+  useremail: yup.string().email.required("Обязательное поле!"),
   userpassword: yup
     .string()
     .min(4, "Пароль должен содержать как минимум 4 символа!")
     .required("Обязательное поле!"),
 });
 
-const mockUser = {
-  mail: "vasya@mail.com",
-  phone_number: "1234567",
-  user_id: 1,
-  name: "vasya petrov",
-  reg_date: new Date().toISOString,
-  city: "andijan",
-};
+// const mockUser = {
+//   mail: "vasya@mail.com",
+//   phone_number: "1234567",
+//   user_id: 1,
+//   name: "vasya petrov",
+//   reg_date: new Date().toISOString,
+//   city: "andijan",
+// };
 
 export const LoginPage = () => {
   const {
@@ -54,26 +52,32 @@ export const LoginPage = () => {
     resolver: yupResolver(registrationFormsSchema),
     defaultValues: {
       userpassword: "",
-      userphone: "",
+      useremail: "",
     },
   });
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state: RootState) => state.userSlice.user);
+  // const user = useSelector((state: RootState) => state.userSlice.user);
+
+  const [loginUser, { data: userData }] = useLoginUserMutation();
 
   const onRegistrationSubmit: SubmitHandler<ILoginForm> = (data) => {
-    dispatch(changeUser(mockUser));
+    loginUser({
+      email: data.useremail,
+      password: data.userpassword,
+    });
+    // dispatch(changeUser(data));
     // console.log("DATA:  ", data);
   };
 
   useEffect(() => {
-    console.log("USER: ", user);
+    console.log("USER: ", userData);
 
-    if (user?.user_id) {
+    if (userData?.user_id) {
       navigate("/profile");
     }
-  }, [user]);
+  }, [userData, navigate]);
 
   return (
     <Container>
@@ -82,14 +86,14 @@ export const LoginPage = () => {
           <Heading headingText="Авторизация" />
           <form onSubmit={handleSubmit(onRegistrationSubmit)}>
             <Controller
-              name="userphone"
+              name="useremail"
               control={control}
               render={({ field }) => (
                 <Input
-                  isError={errors.userphone ? true : false}
-                  errorMessage={errors.userphone?.message}
-                  type="tel"
-                  placeholder="Номер телефона"
+                  isError={errors.useremail ? true : false}
+                  errorMessage={errors.useremail?.message}
+                  type="email"
+                  placeholder="Почта"
                   {...field}
                 />
               )}
