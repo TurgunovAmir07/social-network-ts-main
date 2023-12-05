@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
-import { changeUser } from "../../store/slices/userSlice";
+import { changeUser } from "../../store/slices/authSlice";
 import { useEffect } from "react";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
@@ -81,7 +81,7 @@ export const RegistrationPage = () => {
     console.log("SET USER: ", setUser);
 
     if (setUser?.setUser_id) {
-      navigate("/main");
+      navigate("/");
     }
   }, [setUser, navigate]);
 

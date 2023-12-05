@@ -37,16 +37,15 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({ baseUrl: BaseURL }),
   endpoints: (builder) => ({
-    getPokemonByName: builder.mutation<
-      IRegisterUserResponse,
-      IRegisterUserPayload
-    >({
-      query: (payload) => ({
-        url: "/registration",
-        method: "POST",
-        body: payload,
-      }),
-    }),
+    registerUser: builder.mutation<IRegisterUserResponse, IRegisterUserPayload>(
+      {
+        query: (payload) => ({
+          url: "/registration",
+          method: "POST",
+          body: payload,
+        }),
+      }
+    ),
     loginUser: builder.mutation<ILoginUserResponse, ILoginUserPayload>({
       query: (payload) => ({
         url: "/login",
@@ -62,6 +61,6 @@ export const authApi = createApi({
 
 export const {
   useLoginUserMutation,
-  // useRegisterUserMutation,
+  useRegisterUserMutation,
   useGetUserQuery,
 } = authApi;

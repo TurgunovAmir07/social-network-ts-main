@@ -14,20 +14,20 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 // import { RootState } from "../../store/store";
 // import { useDispatch } from "react-redux/es/exports";
-// import { changeUser } from "../../store/userSlice";
+// import { changeUser } from "../../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 // import { useSelector } from "react-redux";
 import { useLoginUserMutation } from "../../store/API/authApi";
 
 interface ILoginForm {
-  userpassword: string;
   useremail: string;
+  userpassword: string;
 }
 
 // const regexUZB = /^(?:\+998)?(?:\d{2})?(?:\d{7})$/;
 
-const registrationFormsSchema = yup.object({
-  useremail: yup.string().email.required("Обязательное поле!"),
+const loginFormSchema = yup.object({
+  useremail: yup.string().email().required("Обязательное поле!"),
   userpassword: yup
     .string()
     .min(4, "Пароль должен содержать как минимум 4 символа!")
@@ -49,10 +49,10 @@ export const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginForm>({
-    resolver: yupResolver(registrationFormsSchema),
+    resolver: yupResolver(loginFormSchema),
     defaultValues: {
-      userpassword: "",
       useremail: "",
+      userpassword: "",
     },
   });
 
@@ -62,7 +62,7 @@ export const LoginPage = () => {
 
   const [loginUser, { data: userData }] = useLoginUserMutation();
 
-  const onRegistrationSubmit: SubmitHandler<ILoginForm> = (data) => {
+  const onLoginSubmit: SubmitHandler<ILoginForm> = (data) => {
     loginUser({
       email: data.useremail,
       password: data.userpassword,
@@ -72,7 +72,7 @@ export const LoginPage = () => {
   };
 
   useEffect(() => {
-    console.log("USER: ", userData);
+    // console.log("USER: ", userData);
 
     if (userData?.user_id) {
       navigate("/profile");
@@ -84,7 +84,7 @@ export const LoginPage = () => {
       <StyledLoginPage>
         <div className="LoginPage">
           <Heading headingText="Авторизация" />
-          <form onSubmit={handleSubmit(onRegistrationSubmit)}>
+          <form onSubmit={handleSubmit(onLoginSubmit)}>
             <Controller
               name="useremail"
               control={control}
