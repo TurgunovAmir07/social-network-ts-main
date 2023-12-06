@@ -1,22 +1,23 @@
-import React from "react";
-import { Container } from "../../components/UI/container/container.style";
+import React, { useEffect } from "react";
 import { StyledLoginPage } from "../LoginPage/LoginPage.style";
 import { Heading } from "../../components/UI/Header/Typography/Heading";
-import { Input } from "../../components/UI/Input/Input";
-import { RegistrationInfoForRegistration } from "./RegistrationPageForForgetPasswordPage";
 import { Button } from "../../components/UI/Button/Button";
+import { Input } from "../../components/UI/Input/Input";
+import { Container } from "../../components/UI/container/container.style";
+import { RegistrationInfoForRegistration } from "./RegistrationPageForForgetPasswordPage";
 import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+// import { RootState } from "../../store/store";
+// import { useDispatch } from "react-redux";
+// import { changeUser } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../store/store";
-import { changeUser } from "../../store/slices/authSlice";
-import { useEffect } from "react";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+// import { useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useRegisterUserMutation } from "../../store/API/authApi";
 
 interface IRegistrationForm {
   username: string;
@@ -27,7 +28,6 @@ interface IRegistrationForm {
 }
 
 const regexUZB = /^(?:\+998)?(?:\d{2})?(?:\d{7})$/;
-const date = new Date();
 const registrationFormsSchema = yup.object({
   username: yup.string().required("Обязательное поле!"),
   userphone: yup
@@ -41,16 +41,6 @@ const registrationFormsSchema = yup.object({
   useremail: yup.string().email().required("Обязательное поле!"),
   usercity: yup.string().required("Обязательное поле!"),
 });
-
-const mockUser = {
-  mail: "vasya@mail.com",
-  phone_number: "1234567",
-  setUser_id: 1,
-  name: "vasya petrov",
-  reg_date: date.toISOString(),
-  password: "aaaa",
-  city: "andijan",
-};
 
 export const RegistrationPage = () => {
   const {
@@ -68,22 +58,24 @@ export const RegistrationPage = () => {
     },
   });
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const setUser = useTypedSelector((state) => state.authSlice.setUser);
+  const [registrationUser, { data: userData }] = useRegisterUserMutation();
 
   const onRegistrationSubmit: SubmitHandler<IRegistrationForm> = (data) => {
-    dispatch(changeUser(mockUser));
-    // console.log("DATA:  ", data);
+    registrationUser({
+      name: data.username,
+      password: data.userpassword,
+      phone_number: data.userphone,
+      user_city: data.usercity,
+      email: data.useremail,
+    });
   };
 
   useEffect(() => {
-    console.log("SET USER: ", setUser);
-
-    if (setUser?.setUser_id) {
+    if (userData?.user_id) {
       navigate("/");
     }
-  }, [setUser, navigate]);
+  }, [userData, navigate]);
 
   return (
     <Container>
@@ -104,6 +96,7 @@ export const RegistrationPage = () => {
                 />
               )}
             />
+
             <Controller
               name="useremail"
               control={control}
