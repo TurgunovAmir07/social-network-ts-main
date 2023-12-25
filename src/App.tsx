@@ -1,45 +1,35 @@
 import React from "react";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { MainPage } from "./pages/MainPage/MainPage";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
-import { Homework } from "./pages/HomeworkPage/Homework";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage";
-import { ForgetPasswordPage } from "./pages/ForgetPasswordPage/ForgetPasswordPage";
-import { ComeUpWithPassword } from "./pages/ComeUpWithPassword/ComeUpWithPassword";
+import { PostPage } from "./pages/PostPage/PostPage";
 
 const routerConfig = createBrowserRouter([
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
   {
     path: "/",
     element: <MainPage />,
   },
   {
-    path: "/profile",
-    element: <ProfilePage />,
-  },
-  {
-    path: "/homework",
-    element: <Homework />,
+    path: "/login",
+    element: <LoginPage />,
   },
   {
     path: "/registration",
     element: <RegistrationPage />,
   },
   {
-    path: "/forgetpassword",
-    element: <ForgetPasswordPage />,
+    path: "/profile",
+    element: <ProfilePage />,
   },
   {
-    path: "/comeupwithpassword",
-    element: <ComeUpWithPassword />,
+    path: "/posts/:postId",
+    element: <PostPage />,
   },
 ]);
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="App">
       <RouterProvider router={routerConfig} />

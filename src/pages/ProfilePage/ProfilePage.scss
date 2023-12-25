@@ -78,61 +78,61 @@
   }
 }
 
-.Navbar {
-  box-shadow: 0 0 10px var(--light-gray);
-  border-radius: 20px;
-  padding: calc(1vw + 11px);
-  background-color: var(--elems-bgc);
-  color: var(--text-color);
+// .Navbar {
+//   box-shadow: 0 0 10px var(--light-gray);
+//   border-radius: 20px;
+//   padding: calc(1vw + 11px);
+//   background-color: var(--elems-bgc);
+//   color: var(--text-color);
 
-  .navbar__list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
+//   .navbar__list {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 15px;
+//   }
 
-  .navbar__item {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+//   .navbar__item {
+//     cursor: pointer;
+//     display: flex;
+//     align-items: center;
+//     gap: 20px;
 
-    border-radius: 10px;
-    padding: 10px 15px;
-    list-style: none;
-    transition: 200ms;
+//     border-radius: 10px;
+//     padding: 10px 15px;
+//     list-style: none;
+//     transition: 200ms;
 
-    .icon {
-      flex: 0 1 25px;
-      height: calc(1vw + 5px); //? 1440 - 20 | 1920 - 25
-      object-fit: contain;
-      fill: var(--prime-color);
-    }
+//     .icon {
+//       flex: 0 1 25px;
+//       height: calc(1vw + 5px); //? 1440 - 20 | 1920 - 25
+//       object-fit: contain;
+//       fill: var(--prime-color);
+//     }
 
-    .item__name {
-      flex: 1 1 auto;
-    }
+//     .item__name {
+//       flex: 1 1 auto;
+//     }
 
-    &:hover {
-      background-color: var(--light-gray);
-    }
+//     &:hover {
+//       background-color: var(--light-gray);
+//     }
 
-    &:active {
-      transition: 100ms;
-      background-color: var(--prime-color);
-      color: white;
+//     &:active {
+//       transition: 100ms;
+//       background-color: var(--prime-color);
+//       color: white;
 
-      .icon {
-        fill: white;
-      }
+//       .icon {
+//         fill: white;
+//       }
 
-      .Badge {
-        background-color: white;
-        color: var(--text-color);
-      }
-    }
-  }
-}
+//       .Badge {
+//         background-color: white;
+//         color: var(--text-color);
+//       }
+//     }
+//   }
+// }
 
 @media (max-width: 1100px) {
   .ProfilePage {
@@ -145,23 +145,23 @@
     }
   }
 
-  .Navbar {
-    .navbar__item {
-      display: inline-block;
+  // .Navbar {
+  //   .navbar__item {
+  //     display: inline-block;
 
-      .icon {
-        height: 25px;
-      }
+  //     .icon {
+  //       height: 25px;
+  //     }
 
-      .item__name {
-        display: none;
-      }
+  //     .item__name {
+  //       display: none;
+  //     }
 
-      .Badge {
-        display: none;
-      }
-    }
-  }
+  //     .Badge {
+  //       display: none;
+  //     }
+  //   }
+  // }
 }
 
 .ProfileHeader {
@@ -250,41 +250,6 @@
   }
 }
 
-.user__block {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-
-  width: 100%;
-  padding: 20px;
-  padding-left: calc(3.9vw + 165px); //? 180 - 375 | 240 - 1920
-  background-color: var(--elems-bgc);
-  border-radius: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  img {
-    width: calc(3.2vw + 113px); //? 125 - 375 | 175 - 1920
-    height: calc(3.2vw + 113px); //? 125 - 375 | 175 - 1920
-    object-fit: cover;
-    border: 5px solid var(--elems-bgc);
-    border-radius: 50%;
-
-    position: absolute;
-    top: -56px;
-    left: 30px;
-  }
-
-  .buttons-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
 @keyframes wallpaper-anim {
   0% {
     background-position: 0% 0%;
@@ -300,47 +265,6 @@
 @media (max-width: 1750px) {
   .ProfileHeader {
     height: 300px;
-  }
-
-  .user__block {
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 10px;
-
-    padding: 20px;
-
-    img {
-      width: 130px;
-      height: 130px;
-      top: -75px;
-      left: 50px;
-    }
-
-    .user__description {
-      width: 100%;
-    }
-
-    .user__info {
-      width: 100%;
-
-      .parameter {
-        flex: 1 1 33.333%;
-        text-align: center;
-      }
-    }
-
-    .user__name {
-      text-align: right;
-    }
-
-    .buttons-wrapper {
-      width: 100%;
-      flex-direction: row;
-
-      button {
-        flex: 1 1 50%;
-      }
-    }
   }
 }
 
@@ -429,59 +353,59 @@
   }
 }
 
-.WhatsNew {
-  box-shadow: 0 0 10px var(--light-gray);
-  background-color: var(--elems-bgc);
-  border-radius: 20px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+// .WhatsNew {
+//   box-shadow: 0 0 10px var(--light-gray);
+//   background-color: var(--elems-bgc);
+//   border-radius: 20px;
+//   padding: 20px;
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
 
-  img {
-    flex: 0 0 40px;
-    border-radius: 50%;
-    height: 40px;
-    object-fit: cover;
-  }
+//   img {
+//     flex: 0 0 40px;
+//     border-radius: 50%;
+//     height: 40px;
+//     object-fit: cover;
+//   }
 
-  input {
-    flex: 1 1 auto;
-    background: transparent;
-  }
+//   input {
+//     flex: 1 1 auto;
+//     background: transparent;
+//   }
 
-  .icons-wrapper {
-    flex: 0 1 20%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 20px;
+//   .icons-wrapper {
+//     flex: 0 1 20%;
+//     display: flex;
+//     justify-content: flex-end;
+//     align-items: center;
+//     gap: 20px;
 
-    .icon {
-      cursor: pointer;
-      flex: 0 0 24px;
-      width: 24px;
-      border: 1px solid transparent;
-      border-radius: 10px;
-      fill: var(--prime-color);
-      padding: 10px;
-      box-sizing: content-box;
+//     .icon {
+//       cursor: pointer;
+//       flex: 0 0 24px;
+//       width: 24px;
+//       border: 1px solid transparent;
+//       border-radius: 10px;
+//       fill: var(--prime-color);
+//       padding: 10px;
+//       box-sizing: content-box;
 
-      transition: 200ms;
+//       transition: 200ms;
 
-      &:hover {
-        border-color: var(--light-gray);
-        background-color: var(--bgc);
-      }
+//       &:hover {
+//         border-color: var(--light-gray);
+//         background-color: var(--bgc);
+//       }
 
-      &:active {
-        transition: 100ms;
-        background-color: var(--prime-color);
-        fill: white;
-      }
-    }
-  }
-}
+//       &:active {
+//         transition: 100ms;
+//         background-color: var(--prime-color);
+//         fill: white;
+//       }
+//     }
+//   }
+// }
 
 @media (max-width: 730px) {
   .WhatsNew {

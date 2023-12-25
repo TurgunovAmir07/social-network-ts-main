@@ -1,9 +1,5 @@
 import { css, styled } from "styled-components";
 
-export const InputContainer = styled.div`
-  margin-bottom: 20px;
-`;
-
 export const ErrorMessage = styled.p`
   color: ${(props) => props.theme.colors.red};
   margin-top: 10px;
@@ -19,7 +15,6 @@ export const StyledInput = styled.input<IStyledInputProps>`
   padding: 12px 15px;
   background-color: ${(props) => props.theme.colors.bgc};
   border-radius: 10px;
-  /* border: 1px solid transparent; */
   border: 2px solid ${(props) => props.theme.colors.disabledBgc};
   width: 100%;
 

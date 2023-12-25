@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -11,23 +11,17 @@ body {
   min-width: 530px;
   margin: 0;
   font-family: "Inter";
-  background-color: var(--bgc);
-  color: var(--text-color);
+  background-color: ${(props) => props.theme.colors.bgc};
+  color: ${(props) => props.theme.colors.textColor};
 }
 
-button,
+/* button,
 input {
   border: 1px solid transparent;
   outline: 0;
   font-family: inherit;
-}
+} */
 
-/* A */
-/* A */
-/* A */
-/* A */
-/* A */
-/* A */
 a {
   text-decoration: none;
   color: inherit;
@@ -37,7 +31,7 @@ a {
   }
 
   &:visited {
-    color: var(--text-color);
+    color: ${(props) => props.theme.colors.textColor};
   }
 }
 
@@ -49,24 +43,4 @@ a {
   -ms-user-select: none; //? Internet Explorer/Edge
   user-select: none; //? Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
 }
-
-
-/* input {
-  padding: 12px 15px;
-  background-color: var(--bgc);
-  border-radius: 10px;
-  border: 1px solid transparent;
-
-  transition: 200ms;
-
-  &:is(:hover, :focus) {
-    border-color: var(--prime-color);
-  }
-} */
-
-@media (max-width: 730px) {
-  input, button {
-    padding: 10px 12px;
-  }
-}
-`
+`;

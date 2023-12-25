@@ -11,7 +11,6 @@ export const StyledPost = styled.div<IStyledPostProps>`
   background-color: ${(props) => props.theme.colors.elemsBgc};
   border-radius: 20px;
   margin-bottom: 20px;
-
   position: relative;
 
   ${(props) =>
@@ -30,9 +29,6 @@ export const StyledPost = styled.div<IStyledPostProps>`
       }
     `}
 
-  /* &._liked {
-  } */
-
   ${(props) =>
     props.$isMarked &&
     css`
@@ -44,9 +40,6 @@ export const StyledPost = styled.div<IStyledPostProps>`
         }
       }
     `}
-
-  /* &._marked {
-  } */
 
   .UserElem {
     cursor: default;
@@ -72,5 +65,29 @@ export const StyledPost = styled.div<IStyledPostProps>`
 
   &__text {
     margin-bottom: 20px;
+  }
+`;
+
+export const PostSettingsBox = styled.div`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  border-radius: 8px;
+  background: #fefefe;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Более мягкая тень */
+  display: flex;
+  flex-flow: column;
+  padding: 16px; /* Увеличил отступы для более просторного вида */
+
+  span {
+    cursor: pointer;
+    margin-bottom: 8px; /* Добавил отступ снизу между элементами */
+    &:last-child {
+      margin-bottom: 0; /* Убрал отступ после последнего элемента */
+    }
+
+    &:hover {
+      color: #526ed3; /* Цвет при наведении */
+    }
   }
 `;

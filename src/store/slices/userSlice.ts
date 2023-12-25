@@ -14,8 +14,8 @@ export interface IUser {
 }
 
 interface IChangeUserPayload {
-  userpassword: string;
   useremail: string;
+  userpassword: string;
 }
 
 const initialState: IUserSliceState = {

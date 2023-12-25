@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BaseURL } from "../../styles/utils/BaseURL";
+import { baseUrl } from "../../utils/baseUrl";
 
 interface IRegisterUserPayload {
   name: string;
@@ -19,7 +19,7 @@ interface ILoginUserPayload {
   password: string;
 }
 
-interface ILoginUserResponse extends IRegisterUserResponse {}
+export interface ILoginUserResponse extends IRegisterUserResponse {}
 
 interface IGetUserResponse {
   status: number;
@@ -35,7 +35,7 @@ interface IGetUserResponse {
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: BaseURL }),
+  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (builder) => ({
     registerUser: builder.mutation<IRegisterUserResponse, IRegisterUserPayload>(
       {
@@ -60,7 +60,7 @@ export const authApi = createApi({
 });
 
 export const {
-  useLoginUserMutation,
   useRegisterUserMutation,
+  useLoginUserMutation,
   useGetUserQuery,
 } = authApi;

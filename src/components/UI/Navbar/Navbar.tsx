@@ -1,8 +1,9 @@
 import React from "react";
+import { StyledNavbar } from "./Navbar.style";
 
 export const Navbar = () => {
   return (
-    <>
+    <StyledNavbar>
       <ul className="navbar__list">
         <li className="navbar__item">
           <svg
@@ -159,6 +160,6 @@ export const Navbar = () => {
           <span className="Badge">100</span>
         </li>
       </ul>
-    </>
+    </StyledNavbar>
   );
 };
