@@ -1,52 +1,67 @@
 import React, { useState } from "react";
-import { StyledPost } from "./Post.style";
+import { format } from "date-fns";
+
+import { StyledPost, PostCommentBox } from "./Post.style";
 import { PostSettings } from "./PostSettings";
 import { useDeletePostMutation } from "../../store/API/postApi";
+import { PostCommentsItem } from "./PostCommentsItem";
+import { PostCommentsEditor } from "./PostCommentsEditor";
+import type { PostItem } from "../../store/API/postApi";
 
 interface IPostProps {
   isLiked?: boolean;
   isMarked?: boolean;
-  postText: string;
-  userName: string;
-  regDate: string;
-  photos: Array<string>;
-  postId: number | string;
+  post: PostItem;
   onPostDelete?: () => void;
+  onPostEditClick?: () => void;
 }
 
 export const Post = ({
   isLiked,
   isMarked,
-  postText,
-  userName,
-  regDate,
-  photos,
-  postId,
+  post,
   onPostDelete,
+  onPostEditClick,
 }: IPostProps) => {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [newCommentValue, setNewCommentValue] = useState<string>("");
   const [deletePost, { isSuccess }] = useDeletePostMutation();
 
+  const {
+    main_text,
+    user_fk: { name },
+    reg_date,
+    photos,
+    id,
+    comments,
+  } = post;
+
   const handlePostDelete = () => {
-    deletePost(postId)
-    if (typeof onPostDelete === 'function' && isSuccess) {
-      onPostDelete()
-      setIsSettingsOpen(false)
+    deletePost(id);
+    if (typeof onPostDelete === "function" && isSuccess) {
+      onPostDelete();
+      setIsSettingsOpen(false);
     }
-  }
+  };
+
+  const handleEditClick = () => {
+    if (typeof onPostEditClick === "function") {
+      onPostEditClick();
+    }
+  };
 
   return (
     <StyledPost $isLiked={isLiked} $isMarked={isMarked}>
       <div className="UserElem">
         <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
         <div className="user__description">
-          <a href="#" className="main__text">
-            {userName}
-          </a>
-          <p className="secondary__text">{regDate}</p>
+          <span className="main__text">{name}</span>
+          <p className="secondary__text">
+            {format(new Date(reg_date), "dd-MM-yy")}
+          </p>
         </div>
       </div>
-      <p className="Post__text">{postText}</p>
+      <p className="Post__text">{main_text}</p>
       {!!photos.length && (
         <div className="media-container">
           <img
@@ -82,7 +97,7 @@ export const Post = ({
         </div>
       )}
       <div className="PostControls">
-        <div className="icon-wrapper like">
+        {/* <div className="icon-wrapper like">
           <span className="count likes-count">-500</span>
           <svg
             className="icon icon-like"
@@ -94,9 +109,9 @@ export const Post = ({
               d="M11.5 23L9.8325 21.3455C3.91 15.4921 0 11.6191 0 6.89373C0 3.02071 2.783 0 6.325 0C8.326 0 10.2465 1.01526 11.5 2.60708C12.7535 1.01526 14.674 0 16.675 0C20.217 0 23 3.02071 23 6.89373C23 11.6191 19.09 15.4921 13.1675 21.3455L11.5 23Z"
             />
           </svg>
-        </div>
+        </div> */}
         <div className="icon-wrapper comment">
-          <span className="count comments-count">500</span>
+          <span className="count comments-count">{comments.length}</span>
           <svg
             className="icon icon-comment"
             viewBox="0 0 26 26"
@@ -135,29 +150,20 @@ export const Post = ({
           </svg>
         </div>
       </div>
-      <div className="CommentBlock">
-        <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
-        <div className="comment__description">
-          <a href="#" className="comment__owner">
-            Карина Савина
-          </a>
-          <p className="comment__text">Это текст комментария...</p>
-          <a href="#" className="reply">
-            Ответить
-          </a>
-        </div>
-        <span className="date">25 марта</span>
-        <svg
-          className="icon icon-like"
-          viewBox="0 0 23 23"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            id="icon"
-            d="M11.5 23L9.8325 21.3455C3.91 15.4921 0 11.6191 0 6.89373C0 3.02071 2.783 0 6.325 0C8.326 0 10.2465 1.01526 11.5 2.60708C12.7535 1.01526 14.674 0 16.675 0C20.217 0 23 3.02071 23 6.89373C23 11.6191 19.09 15.4921 13.1675 21.3455L11.5 23Z"
-          />
-        </svg>
-      </div>
+      <PostCommentBox>
+        {comments &&
+          comments.length &&
+          comments.map((comment) => (
+            <div className="CommentBlock">
+              <PostCommentsItem commentsText={comment} />
+            </div>
+          ))}
+        <PostCommentsEditor
+          value={newCommentValue}
+          onChange={(event) => setNewCommentValue(event.target.value)}
+        />
+      </PostCommentBox>
+
       <svg
         className="icon icon-more"
         viewBox="0 0 25 5"
@@ -171,9 +177,9 @@ export const Post = ({
         </g>
       </svg>
       {isSettingsOpen && (
-        <PostSettings 
-          onDeleteClick={handlePostDelete} 
-          onEditClick={() => {}} 
+        <PostSettings
+          onDeleteClick={handlePostDelete}
+          onEditClick={handleEditClick}
         />
       )}
     </StyledPost>

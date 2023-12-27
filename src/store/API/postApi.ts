@@ -87,4 +87,5 @@ export const {
   useLazyGetPostByIdQuery,
   useAddNewPostMutation,
   useDeletePostMutation,
+  useEditPostMutation,
 } = postApi;

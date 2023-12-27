@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { History } from "../../components/History/History";
 import { Post } from "../../components/Post/Post";
 import { Container } from "../../components/UI/Container/Container.style";
@@ -9,14 +9,36 @@ import { useLazyGetPostListQuery } from "../../store/API/postApi";
 import "./MainPage.scss";
 import { StyledMainPage } from "./MainPage.style";
 import { FullscreenLoader } from "../../components/UI/FullscreenLoader/FullscreenLoader";
+import { EditPostForm } from "../PostPage/EditPostForm";
+import type { PostItem } from "../../store/API/postApi";
+// import * as yup from "yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 
 export const MainPage = () => {
   const [fetchTrigger, { data, isLoading, isError }] =
     useLazyGetPostListQuery();
 
+  const [selectedPost, setSelectedPost] = useState<PostItem | null>();
+  const [openEditPost, setOpenEditPost] = useState<boolean>(false);
+
   useEffect(() => {
     fetchTrigger(null);
   }, [fetchTrigger, data]);
+
+  const onEditModalClose = useCallback(() => {
+    setSelectedPost(null);
+    setOpenEditPost(false);
+  }, []);
+
+  const handleEditPostClick = useCallback((post: PostItem) => {
+    setSelectedPost(post);
+    setOpenEditPost(true);
+  }, []);
+
+  const handleEditPostSucess = useCallback(() => {
+    fetchTrigger(null);
+    onEditModalClose();
+  }, []);
 
   return (
     <Container>
@@ -101,18 +123,25 @@ export const MainPage = () => {
           <History />
           {isError && <h1>Ошибка :(</h1>}
           {!!data?.message.length &&
-            [...data.message].reverse().map((post) => (
-              <Post
-                key={post.id}
-                postText={post.main_text}
-                regDate={post.reg_date}
-                userName={post.user_fk.name}
-                photos={post.photos}
-                postId={post.id}
-                onPostDelete={() => fetchTrigger(null)}
-              />
-            ))}
+            [...data.message]
+              .reverse()
+              .map((post) => (
+                <Post
+                  key={post.id}
+                  post={post}
+                  onPostDelete={() => fetchTrigger(null)}
+                  onPostEditClick={() => handleEditPostClick(post)}
+                />
+              ))}
         </main>
+        {selectedPost && (
+          <EditPostForm
+            isOpen={openEditPost}
+            post={selectedPost}
+            onCloseModal={onEditModalClose}
+            onEditPostSucces={handleEditPostSucess}
+          />
+        )}
         <aside className="RightSide">
           <div className="List">
             <div className="List__title">

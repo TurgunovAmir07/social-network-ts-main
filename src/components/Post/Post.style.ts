@@ -91,3 +91,19 @@ export const PostSettingsBox = styled.div`
     }
   }
 `;
+
+export const PostCommentBox = styled.div`
+  display: flex;
+  flex-flow: column;
+`;
+
+export const StyledTextArea = styled.textarea`
+  margin-top: 24px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+  box-sizing: border-box;
+  font-size: 16px;
+`;
